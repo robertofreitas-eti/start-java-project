@@ -1,15 +1,18 @@
 package br.eti.freitas.startproject.security.dto;
 
+/**
+ * This class is responsible for allowing data transfer from <b>Token</b> between subsystems
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-01
+ */
 public class TokenDto {
 
 	private String token;
 	private String type;
-	private String expires_in;
 
-	public TokenDto(String type, String token, String expires_in) {
-		this.type = type;
-		this.token = token;
-		this.expires_in = expires_in;
+	public TokenDto() {
 	}
 
 	public String getToken() {
@@ -28,19 +31,10 @@ public class TokenDto {
 		this.type = type;
 	}
 
-	public String getExpires_in() {
-		return expires_in;
-	}
-
-	public void setExpires_in(String expires_in) {
-		this.expires_in = expires_in;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("TokenDto [token=").append(token).append(", type=").append(type).append(", expires_in=")
-				.append(expires_in).append("]");
+		builder.append("TokenDto [token=").append(token).append(", type=").append(type).append("]");
 		return builder.toString();
 	}
 

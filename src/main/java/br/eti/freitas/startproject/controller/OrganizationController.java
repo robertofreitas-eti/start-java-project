@@ -34,12 +34,12 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 /**
-* This controller is responsible for the management of the <b>Organization</b>
-*
-* @author  Roberto Freitas
-* @version 1.0
-* @since   2023-03-01
-*/
+ * This controller is responsible for the management of the <b>Organization</b>
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-01
+ */
 @RestController
 @RequestMapping(value = "/api/v1")
 @Api(tags = "Organization", description = "Endpoints for managing Organization")

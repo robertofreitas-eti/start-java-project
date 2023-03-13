@@ -31,20 +31,17 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 /**
-* This controller is responsible for the management of the <b>Roles</b>
-*
-* @author  Roberto Freitas
-* @version 1.0
-* @since   2023-03-01
-*/
+ * This controller is responsible for the management of the <b>Roles</b>
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-01
+ */
 @RestController
 @RequestMapping("/api/v1")
 @Api(tags = "Roles", description = "Endpoints for managing Roles")
-@ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized")
-					  , @ApiResponse(code = 404, message = "Not found")
-					  , @ApiResponse(code = 500, message = "Internal error")
-                      }
-			  )
+@ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized"),
+		@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 500, message = "Internal error") })
 public class RoleController {
 
 	@Autowired
@@ -91,14 +88,13 @@ public class RoleController {
 	}
 
 	@PreAuthorize("hasPermission('role', 'read') or hasRole('ADMIN')")
-	@RequestMapping(value= "/roles/page", method = RequestMethod.GET)
+	@RequestMapping(value = "/roles/page", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.PARTIAL_CONTENT)
 	@ApiOperation(value = "Find all Roles", notes = "Method used to find all Roles and show per page")
-	public ResponseEntity<Page<Role>> getRoles(
-		@RequestParam(value = "page", defaultValue = "0") Integer page,
-		@RequestParam(value = "size", defaultValue = "20") Integer size,
-		@RequestParam(value = "sort", defaultValue = "name") String sort,
-		@RequestParam(value = "direction", defaultValue = "ASC") Direction direction) {
+	public ResponseEntity<Page<Role>> getRoles(@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "20") Integer size,
+			@RequestParam(value = "sort", defaultValue = "name") String sort,
+			@RequestParam(value = "direction", defaultValue = "ASC") Direction direction) {
 
 		PageRequest pageRequest = PageRequest.of(page, size, direction, sort);
 		Page<Role> rolesPage = roleService.getRoles(pageRequest);
@@ -115,9 +111,9 @@ public class RoleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@ApiOperation(value = "Add a new Role", notes = "Method used to add a new Role")
 	public ResponseEntity<Void> writeRole(@Validated @RequestBody RoleDto roleDto) {
-		Role role =roleService.createRole(modelMapper.map(roleDto, Role.class));
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(role.getRoleId()).toUri();
+		Role role = roleService.createRole(modelMapper.map(roleDto, Role.class));
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(role.getRoleId())
+				.toUri();
 		return ResponseEntity.created(location).build();
 	}
 

@@ -1,14 +1,19 @@
 package br.eti.freitas.startproject.security.dto;
 
+/**
+ * This class is responsible for allowing data transfer from <b>Privilege</b> between subsystems
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-12
+ */
 public class PrivilegeDto {
 
 	private Long privilegeId;
 	private String name;
 	private boolean enabled;
 
-	public PrivilegeDto(String name, boolean enabled) {
-		this.name = name;
-		this.enabled = enabled;
+	public PrivilegeDto() {
 	}
 
 	public Long getPrivilegeId() {

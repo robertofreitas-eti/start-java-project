@@ -1,13 +1,18 @@
 package br.eti.freitas.startproject.security.dto;
 
+/**
+ * This class is responsible for allowing data transfer from <b>Login</b> between subsystems
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-12
+ */
 public class LoginDto {
 
 	private String username;
 	private String password;
 
-	public LoginDto(String username, String password) {
-		this.username = username;
-		this.password = password;
+	public LoginDto() {
 	}
 
 	public String getUsername() {

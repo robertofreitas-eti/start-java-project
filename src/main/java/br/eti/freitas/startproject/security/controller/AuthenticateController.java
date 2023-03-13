@@ -34,12 +34,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
-* This controller is responsible for the management of the <b>Authenticate</b>
-*
-* @author  Roberto Freitas
-* @version 1.0
-* @since   2023-03-01
-*/
+ * This controller is responsible for the management of the <b>Authenticate</b>
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-01
+ */
 @RestController
 @RequestMapping("/api/auth")
 @Api(tags = "Authenticate", description = "Endpoints for authenticate users")
@@ -65,17 +65,12 @@ public class AuthenticateController {
 
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
-	@ApiOperation( value = "Logs user into the system"
-				 , notes = "Method used to authenticate user on platform")
+	@ApiOperation(value = "Logs user into the system", notes = "Method used to authenticate user on platform")
 	public ResponseEntity<Object> authenticateUser(@RequestBody @Validated LoginDto loginDto) throws Exception {
 
 		try {
 			final Authentication authentication = authenticationManager.authenticate(
-	                new UsernamePasswordAuthenticationToken(
-	                		loginDto.getUsername(),
-	                		loginDto.getPassword()
-	                )
-	        );
+					new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword()));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		} catch (DisabledException e) {
@@ -84,11 +79,14 @@ public class AuthenticateController {
 			throw new Exception(SecurityConstantMessage.INVALID_CREDENTIALS, e);
 		}
 
-        UserDetails userDetails = securityUserDetailsService.loadUserByUsername(loginDto.getUsername());
+		UserDetails userDetails = securityUserDetailsService.loadUserByUsername(loginDto.getUsername());
 
 		String token = jwtTokenService.generateToken(userDetails);
 
-		TokenDto tokenDto = new TokenDto("Bearer", token, null);
+		TokenDto tokenDto = new TokenDto();
+		
+		tokenDto.setType("Bearer");
+		tokenDto.setToken(token);
 
 		return ResponseEntity.ok().body(tokenDto);
 
@@ -96,8 +94,7 @@ public class AuthenticateController {
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
-	@ApiOperation( value = "Create user"
-				 , notes = "Method used to create a new user on the platform")
+	@ApiOperation(value = "Create user", notes = "Method used to create a new user on the platform")
 	public ResponseEntity<Object> registerUser(@RequestBody SignUpDto signUpDto) {
 
 		if (userRepository.existsByUsername(signUpDto.getUsername())) {

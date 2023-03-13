@@ -25,20 +25,17 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 /**
-* This controller is responsible for the management of the <b>Privilege</b>
-*
-* @author  Roberto Freitas
-* @version 1.0
-* @since   2023-03-01
-*/
+ * This controller is responsible for the management of the <b>Privilege</b>
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-01
+ */
 @RestController
 @RequestMapping("/api/v1")
 @Api(tags = "Privileges", description = "Endpoints for managing Privileges")
-@ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized")
-					  , @ApiResponse(code = 404, message = "Not found")
-					  , @ApiResponse(code = 500, message = "Internal error")
-                      }
-			  )
+@ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized"),
+		@ApiResponse(code = 404, message = "Not found"), @ApiResponse(code = 500, message = "Internal error") })
 public class PrivilegeController {
 
 	@Autowired
@@ -71,8 +68,7 @@ public class PrivilegeController {
 	@PreAuthorize("hasPermission('privilege','read') or hasRole('ADMIN')")
 	@RequestMapping(value = "/privileges/page", method = RequestMethod.GET)
 	@ApiOperation(value = "Get Privilege")
-	public ResponseEntity<Page<Privilege>> getPrivileges(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public ResponseEntity<Page<Privilege>> getPrivileges(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "size", defaultValue = "20") Integer size,
 			@RequestParam(value = "sort", defaultValue = "name") String sort,
 			@RequestParam(value = "direction", defaultValue = "ASC") Direction direction) {

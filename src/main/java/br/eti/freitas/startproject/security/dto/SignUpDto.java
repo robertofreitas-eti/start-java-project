@@ -1,5 +1,12 @@
 package br.eti.freitas.startproject.security.dto;
 
+/**
+ * This class is responsible for allowing data transfer from <b>SignUp</b> between subsystems
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-12
+ */
 public class SignUpDto {
 
 	private String name;
@@ -7,11 +14,7 @@ public class SignUpDto {
 	private String email;
 	private String password;
 
-	public SignUpDto(String name, String username, String email, String password) {
-		this.name = name;
-		this.username = username;
-		this.email = email;
-		this.password = password;
+	public SignUpDto() {
 	}
 
 	public String getName() {

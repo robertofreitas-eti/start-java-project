@@ -1,14 +1,19 @@
 package br.eti.freitas.startproject.security.dto;
 
+/**
+ * This class is responsible for allowing data transfer from <b>Role</b> between subsystems
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-12
+ */
 public class RoleDto {
 
 	private String name;
 	private String description;
 	private boolean enabled;
 
-	public RoleDto(String name, boolean enabled) {
-		this.name = name;
-		this.enabled = enabled;
+	public RoleDto() {
 	}
 
 	public String getName() {

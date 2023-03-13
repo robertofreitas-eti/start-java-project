@@ -24,12 +24,12 @@ import br.eti.freitas.startproject.security.service.UserService;
 import io.swagger.annotations.Api;
 
 /**
-* This controller is responsible for the management of the <b>Users</b>
-*
-* @author  Roberto Freitas
-* @version 1.0
-* @since   2023-03-01
-*/
+ * This controller is responsible for the management of the <b>Users</b>
+ *
+ * @author Roberto Freitas
+ * @version 1.0
+ * @since 2023-03-01
+ */
 @RestController
 @RequestMapping("/api/v1")
 @Api(tags = "Users")
@@ -44,7 +44,7 @@ public class UserController {
 	@PreAuthorize("hasPermission('user', 'read') or hasRole('ADMIN')")
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public List<UserDto> getUsers(){
+	public List<UserDto> getUsers() {
 		return userService.getUsers().stream().map(user -> modelMapper.map(user, UserDto.class))
 				.collect(Collectors.toList());
 	}
